@@ -1,0 +1,12 @@
+- name: Install apt-repository dependency
+  become: yes
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - software-properties-common
+  tags: packages
+- name: add Python dead snakes repo for 3.8
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: 'ppa:deadsnakes/ppa'

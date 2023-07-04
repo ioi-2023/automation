@@ -10,7 +10,7 @@
   tags: migrate
 
 - name: Migrate CMS database
-  command: cmsInitDB
+  command: /opt/.venv/bin/cmsInitDB
   when: cms_db_tables_query_result.rowcount == 0
   notify: Restart CMS
   tags: migrate

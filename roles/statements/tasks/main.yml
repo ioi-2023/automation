@@ -6,7 +6,7 @@
 
 - name: Add task statement
   become: yes
-  command: "cmsAddStatement {% if file[:-4] | basename == 'en' %}-d{% endif %} -o {{ task }} {{ file[:-4] | basename }} {{ file }}"
+  command: "/opt/.venv/bin/cmsAddStatement {% if file[:-4] | basename == 'en' %}-d{% endif %} -o {{ task }} {{ file[:-4] | basename }} {{ file }}"
   loop: "{{ statements.files | map(attribute='path') | list }}"
   loop_control:
     loop_var: file

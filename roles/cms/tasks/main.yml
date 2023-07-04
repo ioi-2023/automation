@@ -1,3 +1,7 @@
+- name: Add PPA for Python 3.8
+  include_tasks: add_python_ppa.yml
+  tags: always
+
 - name: Install CMS base prerequisite packages
   become: yes
   package:
@@ -9,7 +13,7 @@
     - libpq-dev
     - python3.8
     - python3.8-dev
-    - python3-pip
+    - python3.8-venv
     - libyaml-dev
     - zip
     - libffi-dev
@@ -176,6 +180,8 @@
   become: yes
   pip:
     requirements: /opt/cms/requirements.txt
+    virtualenv: /opt/.venv
+    virtualenv_command: python3.8 -m venv
   when: cms_git_checkout_result.get('after', '<cms_git_checkout_skipped>') != (slurp_cms_installed_git_commit_result.get('content', '') | b64decode | trim)
   notify: Restart CMS
 
@@ -183,6 +189,8 @@
   become: yes
   pip:
     name: /opt/cms
+    virtualenv: /opt/.venv
+    virtualenv_command: python3.8 -m venv
   when: cms_git_checkout_result.get('after', '<cms_git_checkout_skipped>') != (slurp_cms_installed_git_commit_result.get('content', '') | b64decode | trim)
   notify: Restart CMS
 

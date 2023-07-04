@@ -7,7 +7,7 @@ After=postgresql.service nginx.service
 [Service]
 Type=simple
 User=cmsrankinguser
-ExecStart=/usr/local/bin/cmsRankingWebServer
+ExecStart=/opt/.venv/bin/cmsRankingWebServer
 
 [Install]
 WantedBy=basic.target
