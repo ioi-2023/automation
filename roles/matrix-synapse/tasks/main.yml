@@ -93,6 +93,7 @@
   service:
     name: "matrix-synapse-worker@{{ item }}.service"
     state: restarted
+    enabled: true
   with_items:
     - worker_appservice
     - worker_federation_sender
